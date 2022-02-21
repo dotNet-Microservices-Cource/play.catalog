@@ -1,6 +1,3 @@
-using MassTransit;
-using MassTransit.Definition;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +12,7 @@ using Play.Common.Settings;
 
 namespace Play.Catalog.Service
 {
-    public class Startup
+  public class Startup
     {
         private const string AllowedOriginSetting = "AllowedOrigin";
 
@@ -35,7 +32,7 @@ namespace Play.Catalog.Service
 
             services.AddMongo()
                     .AddMongoRepository<Item>("items")
-                    .AddMassTransitWithRabbitMq()
+                    .AddMassTransitWithMessageBroker(Configuration)
                     .AddJwtBearerAuthentication();
 
             services.AddAuthorization(options =>
