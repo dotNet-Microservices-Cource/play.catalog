@@ -48,3 +48,9 @@ az aks pod-identity add --resource-group $resourcegroup --cluster-name $appname 
 $IDENTITY_CLIENT_ID=az identity show -g $resourcegroup -n $managedname --query clientId -otsv
 az keyvault set-policy -n $appname --secret-permissions get list --spn $IDENTITY_CLIENT_ID
 ```
+
+## Creating the Kubernetes resources
+```powershell
+$namespace="catalog"
+kubectl apply -f .\kubernetes\catalog.yaml -n $namespace
+```
